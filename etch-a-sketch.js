@@ -17,7 +17,7 @@ for (i=0; i<(gridSize**2); i++) {
 const square = document.createElement("div");
     container.appendChild(square);
         square.classList.add("square");
-        square.style.border = "1px solid gray";
+        square.style.border = "1px solid #f5f5f5";
         square.style.minWidth = `calc(100% / ${gridSize})`;
         square.style.aspectRatio = "1/1";
         square.style.flex = "1";
@@ -28,13 +28,23 @@ const square = document.createElement("div");
         resetButton.addEventListener('click', () => {
             square.style.backgroundColor = "white";
         })
+        
+        let clickCount = 0;
         rainbowButton.addEventListener('click', () => {
+            clickCount++;
+            
+            if (clickCount % 2 === 1) {
+             square.addEventListener('mouseover', () => {
+                square.style.backgroundColor = getRandomColor();
+            })
+        } else {
             square.addEventListener('mouseover', () => {
-            square.style.backgroundColor = getRandomColor();
-            })       
-        });
+                square.style.backgroundColor = "black";
+
+        })
+    }})
 }
-}
+}   
 const buttonContainer = document.createElement("div");
     document.body.appendChild(buttonContainer);
         buttonContainer.style.display = "flex";
@@ -82,8 +92,20 @@ const rainbowButton = document.createElement("button");
        })
        rainbowButton.addEventListener('mouseout', () => {
         rainbowButton.style.transform = "";    
-   })
-                
+        })
+        let clickCount = 0;
+        rainbowButton.addEventListener('click', () => {
+            clickCount++;
+            if(clickCount % 2 === 1) {
+            rainbowButton.style.backgroundColor = "#DB6C79";
+            rainbowButton.style.color = "white";
+            } else {
+            rainbowButton.style.backgroundColor = "white";
+            rainbowButton.style.color = "black";
+        }
+    })
+       
+           
 
 function getRandomColor() {
     const letters = "123456789ABCDEF";
